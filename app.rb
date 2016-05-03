@@ -85,6 +85,7 @@ def display_solutions(solutions)
 end
 
 loop do
+  puts "Welcome to 24 Game Solver"
   numbers = []
 
   loop do
