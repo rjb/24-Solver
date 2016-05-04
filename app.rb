@@ -84,12 +84,22 @@ def display_solutions(solutions)
   end
 end
 
-loop do
+def display_welcome_message
+  puts "-" * 25
   puts "Welcome to 24 Game Solver"
+  puts "-" * 25
+end
+
+def display_instructions
+  puts "Enter 4 numbers (space separated) and I will tell you the solutions:"
+end
+
+loop do
+  display_welcome_message
   numbers = []
 
   loop do
-    puts "Enter the 4 numbers (space separated):"
+    display_instructions
     numbers = gets.chomp.split
     break if valid_entry?(numbers)
     puts "Invalid entry."
