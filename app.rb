@@ -39,9 +39,9 @@ end
 def split_solutions(numbers)
   results = []
   operators = ['*', '+', '/', '-']
-  num_permutations = numbers.permutation(4).to_a.uniq
+  num_perms = numbers.permutation(4).to_a.uniq
 
-  num_permutations.each do |nums|
+  num_perms.each do |nums|
     operators.each do |op|
       first = nums[0]
       first = first.send(op.to_sym, nums[1].to_f)
