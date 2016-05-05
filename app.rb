@@ -108,7 +108,7 @@ loop do
   solutions = solve(numbers)
   display_solutions(solutions)
 
-  puts "Again? (y/n)"
+  puts "Would you like to solve another set of numbers? (y/n)"
   break unless gets.chomp.downcase == 'y'
 end
 
