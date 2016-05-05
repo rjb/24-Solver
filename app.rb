@@ -21,11 +21,11 @@ def chain_solutions(numbers)
   num_perms.each do |nums|
     op_combos.each do |ops|
       result = nums[0].to_f
-      
+
       ops.each_with_index do |op, index|
         result = result.send(op.to_sym, nums[index+1].to_f)
       end
-      
+
       if result == 24
           results << "((#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]}"
           break
