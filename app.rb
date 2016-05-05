@@ -70,19 +70,14 @@ def middle_left_solutions(numbers)
   num_perms = numbers.permutation(4).to_a.uniq
 
   num_perms.each do |nums|
-    first = nums[0]
-    second = nums[1]
-    third = nums[2]
-    fourth = nums[3]
-
     ops.each do |op|
       ops.each do |op2|
         ops.each do |op3|
-          middle_result = second.send(op2.to_sym, third.to_f)
-          left_result = first.send(op.to_sym, middle_result.to_f)
-          result = fourth.send(op3.to_sym, left_result.to_f)
+          middle_result = nums[1].send(op2.to_sym, nums[2].to_f)
+          left_result = nums[0].send(op.to_sym, middle_result.to_f)
+          result = nums[3].send(op3.to_sym, left_result.to_f)
           if result == 24
-            results << "(#{first} #{op} (#{second} #{op2} #{third})) #{op3} #{fourth}"
+            results << "(#{nums[0]} #{op} (#{nums[1]} #{op2} #{nums[2]})) #{op3} #{nums[3]}"
           end
         end
       end
