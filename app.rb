@@ -64,10 +64,39 @@ def split_solutions(numbers)
   results
 end
 
+def middle_left_solutions(numbers)
+  results = []
+  ops = ['*', '+', '/', '-']
+  num_perms = numbers.permutation(4).to_a.uniq
+
+  num_perms.each do |nums|
+    first = nums[0]
+    second = nums[1]
+    third = nums[2]
+    fourth = nums[3]
+
+    ops.each do |op|
+      ops.each do |op2|
+        ops.each do |op3|
+          middle_result = second.send(op2.to_sym, third.to_f)
+          left_result = first.send(op.to_sym, middle_result.to_f)
+          result = fourth.send(op3.to_sym, left_result.to_f)
+          if result == 24
+            results << "(#{first} #{op} (#{second} #{op2} #{third})) #{op3} #{fourth}"
+          end
+        end
+      end
+    end
+  end
+
+  results
+end
+
 def solve(numbers_orig)
   results = []
   results << chain_solutions(numbers_orig.map(&:to_i))
   results << split_solutions(numbers_orig.map(&:to_i))
+  results << middle_left_solutions(numbers_orig.map(&:to_i))
   results.flatten.uniq
 end
 
