@@ -115,7 +115,7 @@ def display_welcome_message
 end
 
 def display_instructions
-  puts "Enter 4 numbers (space separated) and I will tell you the solutions:"
+  puts "Enter 4 numbers (space separated) and I will show every possible solution:"
 end
 
 loop do
