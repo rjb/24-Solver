@@ -110,7 +110,7 @@ end
 
 def display_welcome_message
   puts "-" * 25
-  puts "Welcome to 24 Game Solver"
+  puts "Welcome to 24-Solver"
   puts "-" * 25
 end
 
