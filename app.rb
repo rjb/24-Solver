@@ -1,3 +1,5 @@
+require 'pry'
+
 def combinations(arr)
   results = []
 
@@ -73,25 +75,37 @@ def middle_solutions(numbers)
     ops.each do |op|
       ops.each do |op2|
         ops.each do |op3|
-          middle_result = nums[1].send(op2.to_sym, nums[2].to_f)
-
-          middle_left_result = nums[0].send(op.to_sym, middle_result.to_f)
-          middle_left_result_result = nums[3].send(op3.to_sym, middle_left_result.to_f)
-          if middle_left_result_result == 24
-            results << "(#{nums[0]} #{op} (#{nums[1]} #{op2} #{nums[2]})) #{op3} #{nums[3]}"
-          end
-
-          middle_right_result = middle_result.send(op3.to_sym, nums[3].to_f)
-          middle_right_result_result = nums[0].send(op.to_sym, middle_right_result.to_f)
-          if middle_right_result_result == 24
-            results << "#{nums[0]} #{op} ((#{nums[1]} #{op2} #{nums[2]}) #{op3} #{nums[3]})"
-          end
+          current_ops = ["#{op}", "#{op2}", "#{op3}"]
+          results << middle_left_solution(nums, current_ops)
+          results << middle_right_solution(nums, current_ops)
         end
       end
     end
   end
 
   results
+end
+
+def middle_left_solution(nums, ops)
+  solution = ""
+  middle = nums[1].send(ops[1].to_sym, nums[2].to_f)
+  left = nums[0].send(ops[0].to_sym, middle.to_f)
+  result = left.send(ops[2].to_sym, nums[3].to_f)
+  if result == 24
+    solution = "(#{nums[0]} #{ops[0]} (#{nums[1]} #{ops[1]} #{nums[2]})) #{ops[2]} #{nums[3]}"
+  end
+  solution
+end
+
+def middle_right_solution(nums, ops)
+  solution = ""
+  middle = nums[1].send(ops[1].to_sym, nums[2].to_f)
+  right = middle.send(ops[2].to_sym, nums[3].to_f)
+  result = nums[0].send(ops[0].to_sym, right.to_f)
+  if result == 24
+    solution = "(#{nums[0]} #{ops[0]} ((#{nums[1]} #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]})"
+  end
+  solution
 end
 
 def solve(numbers_orig)
@@ -110,6 +124,7 @@ def display_solutions(solutions)
   if solutions.count > 0
     puts "Solutions:"
     puts solutions
+    puts "Found: #{solutions.count}"
   else
     puts "No solutions."
   end
