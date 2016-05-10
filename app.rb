@@ -77,6 +77,7 @@ def middle_solutions(numbers)
         ops.each do |op3|
           current_ops = ["#{op}", "#{op2}", "#{op3}"]
           results << middle_left_solution(nums, current_ops)
+          # results << middle_solution(nums, current_ops)
           results << middle_right_solution(nums, current_ops)
         end
       end
@@ -137,7 +138,7 @@ def display_welcome_message
 end
 
 def display_instructions
-  puts "Enter 4 numbers (space separated) and I will show every possible solution:"
+  puts "Enter 4 numbers (space separated) and I will display every possible solution:"
 end
 
 loop do
