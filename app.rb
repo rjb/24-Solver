@@ -1,5 +1,3 @@
-require 'pry'
-
 def combinations(arr)
   results = []
 
