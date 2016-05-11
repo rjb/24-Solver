@@ -1,20 +1,6 @@
-def combinations(arr)
-  results = []
-
-  arr.each do |item1|
-    arr.each do |item2|
-      arr.each do |item3|
-        results << [item1, item2, item3]
-      end
-    end
-  end
-
-  results
-end
-
 def solve(numbers)
   results = []
-  op_combos = combinations(['*', '+', '/', '-'])
+  op_combos = ['*', '+', '/', '-'].repeated_permutation(3).to_a
   num_perms = numbers.permutation(4).to_a.uniq
 
   num_perms.each do |nums|
