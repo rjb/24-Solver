@@ -40,19 +40,15 @@ end
 
 def middle_solutions(numbers)
   results = []
-  ops = ['*', '+', '/', '-']
+  op_combos = combinations(['*', '+', '/', '-'])
   num_perms = numbers.permutation(4).to_a.uniq
 
   num_perms.each do |nums|
-    ops.each do |op|
-      ops.each do |op2|
-        ops.each do |op3|
-          current_ops = ["#{op}", "#{op2}", "#{op3}"]
-          results << middle_left_solution(nums, current_ops) unless middle_left_solution(nums, current_ops).empty?
-          results << split_solution(nums, current_ops) unless split_solution(nums, current_ops).empty?
-          results << middle_right_solution(nums, current_ops) unless middle_right_solution(nums, current_ops).empty?
-        end
-      end
+    op_combos.each do |ops|
+      current_ops = ["#{ops[0]}", "#{ops[1]}", "#{ops[2]}"]
+      results << middle_left_solution(nums, current_ops) unless middle_left_solution(nums, current_ops).empty?
+      results << split_solution(nums, current_ops) unless split_solution(nums, current_ops).empty?
+      results << middle_right_solution(nums, current_ops) unless middle_right_solution(nums, current_ops).empty?
     end
   end
 
