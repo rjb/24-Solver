@@ -38,34 +38,6 @@ def chain_solutions(numbers)
   results
 end
 
-def split_solutions(numbers)
-  results = []
-  operators = ['*', '+', '/', '-']
-  num_perms = numbers.permutation(4).to_a.uniq
-
-  num_perms.each do |nums|
-    operators.each do |op|
-      first = nums[0]
-      first = first.send(op.to_sym, nums[1].to_f)
-
-      operators.each do |op2|
-        second = nums[2]
-        second = second.send(op2.to_sym, nums[3].to_f)
-
-        operators.each do |op3|
-          result = first
-          result = result.send(op3.to_sym, second)
-          if result == 24
-            results << "(#{nums[0]} #{op} #{nums[1]}) #{op3} (#{nums[2]} #{op2} #{nums[3]})"
-          end
-        end
-      end
-    end
-  end
-
-  results
-end
-
 def middle_solutions(numbers)
   results = []
   ops = ['*', '+', '/', '-']
@@ -76,15 +48,26 @@ def middle_solutions(numbers)
       ops.each do |op2|
         ops.each do |op3|
           current_ops = ["#{op}", "#{op2}", "#{op3}"]
-          results << middle_left_solution(nums, current_ops)
-          # results << middle_solution(nums, current_ops)
-          results << middle_right_solution(nums, current_ops)
+          results << middle_left_solution(nums, current_ops) unless middle_left_solution(nums, current_ops).empty?
+          results << split_solution(nums, current_ops) unless split_solution(nums, current_ops).empty?
+          results << middle_right_solution(nums, current_ops) unless middle_right_solution(nums, current_ops).empty?
         end
       end
     end
   end
 
   results
+end
+
+def split_solution(nums, ops)
+  solution = ""
+  left = nums[0].send(ops[0].to_sym, nums[1].to_f)
+  right = nums[2].send(ops[2].to_sym, nums[3].to_f)
+  result = left.send(ops[1].to_sym, right.to_f)
+  if result == 24
+    solution = "(#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} (#{nums[2]} #{ops[2]} #{nums[3]})"
+  end
+  solution
 end
 
 def middle_left_solution(nums, ops)
@@ -112,7 +95,6 @@ end
 def solve(numbers_orig)
   results = []
   results << chain_solutions(numbers_orig.map(&:to_i))
-  results << split_solutions(numbers_orig.map(&:to_i))
   results << middle_solutions(numbers_orig.map(&:to_i))
   results.flatten.uniq
 end
