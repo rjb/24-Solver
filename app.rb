@@ -70,9 +70,9 @@ def display_solutions(solutions)
 end
 
 def display_welcome_message
-  puts "-" * 25
+  puts "-" * 20
   puts "Welcome to 24-Solver"
-  puts "-" * 25
+  puts "-" * 20
 end
 
 def display_instructions
