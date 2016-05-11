@@ -56,7 +56,7 @@ def middle_right?(nums, ops)
 end
 
 def valid_entry?(numbers)
-  numbers.select { |num| /^[0-9]*$/ =~ num }.length == 4
+  numbers.select { |num| num =~ /^[0-9]*$/ }.length == 4
 end
 
 def display_solutions(solutions)
