@@ -8,15 +8,12 @@ def solve(numbers)
       if chain?(nums, ops)
         results << "((#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]}"
       end
-
       if middle_left?(nums, ops)
         results << "(#{nums[0]} #{ops[0]} (#{nums[1]} #{ops[1]} #{nums[2]})) #{ops[2]} #{nums[3]}"
       end
-
       if middle_split?(nums, ops)
         results << "(#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} (#{nums[2]} #{ops[2]} #{nums[3]})"
       end
-
       if middle_right?(nums, ops)
         results << "(#{nums[0]} #{ops[0]} ((#{nums[1]} #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]})"
       end
