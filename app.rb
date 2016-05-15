@@ -84,7 +84,7 @@ loop do
     display_instructions
     numbers = gets.chomp.split
     break if valid_entry?(numbers)
-    puts "Invalid entry."
+    puts "Numbers only please."
   end
 
   solutions = solve(numbers.map(&:to_i))
