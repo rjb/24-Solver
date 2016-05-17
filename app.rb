@@ -92,7 +92,7 @@ loop do
     display_instructions
     numbers = gets.chomp.split
     break if valid_entry?(numbers)
-    puts "Numbers only please."
+    puts "Whole numbers only please."
   end
 
   solutions = solve(numbers.map(&:to_i))
