@@ -5,22 +5,30 @@ def solve(numbers)
 
   num_perms.each do |nums|
     op_combos.each do |ops|
-      if chain?(nums, ops)
-        results << "((#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]}"
-      end
-      if middle_left?(nums, ops)
-        results << "(#{nums[0]} #{ops[0]} (#{nums[1]} #{ops[1]} #{nums[2]})) #{ops[2]} #{nums[3]}"
-      end
-      if middle_split?(nums, ops)
-        results << "(#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} (#{nums[2]} #{ops[2]} #{nums[3]})"
-      end
-      if middle_right?(nums, ops)
-        results << "(#{nums[0]} #{ops[0]} ((#{nums[1]} #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]})"
-      end
+      results << chain_string(nums, ops) if chain?(nums, ops)
+      results << middle_left_string(nums, ops) if middle_left?(nums, ops)
+      results << middle_split_string(nums, ops) if middle_split?(nums, ops)
+      results << middle_right_string(nums, ops) if middle_right?(nums, ops)
     end
   end
 
   results.uniq
+end
+
+def chain_string(nums, ops)
+  "((#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]}"
+end
+
+def middle_left_string(nums, ops)
+  "(#{nums[0]} #{ops[0]} (#{nums[1]} #{ops[1]} #{nums[2]})) #{ops[2]} #{nums[3]}"
+end
+
+def middle_split_string(nums, ops)
+  "(#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} (#{nums[2]} #{ops[2]} #{nums[3]})"
+end
+
+def middle_right_string(nums, ops)
+  "#{nums[0]} #{ops[0]} ((#{nums[1]} #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]})"
 end
 
 def chain?(nums, ops)
