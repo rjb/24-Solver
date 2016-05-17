@@ -4,6 +4,8 @@
 
 24 Solver, when given four numbers, will return all the possible solutions.
 
+See it live at: [http://24solver.us-west-2.elasticbeanstalk.com/](http://24solver.us-west-2.elasticbeanstalk.com/)
+
 ##USAGE
 
 1. Run app.rb from the command line
