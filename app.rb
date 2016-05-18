@@ -70,7 +70,7 @@ def display_solutions(solutions)
     puts solutions
     puts "Found: #{solutions.count}"
   else
-    puts "No solutions."
+    puts "No solutions found."
   end
 end
 
