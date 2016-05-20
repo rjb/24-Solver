@@ -81,7 +81,8 @@ def display_welcome_message
 end
 
 def display_instructions
-  puts "Enter your 4 numbers (space separated), then press Enter to see every solution that equals 24."
+  puts "Enter your 4 numbers (space separated)," \
+         " then press Enter to see solution that equals 24."
 end
 
 loop do
