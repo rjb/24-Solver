@@ -82,7 +82,7 @@ end
 
 def display_instructions
   puts "Enter your 4 numbers (space separated)," \
-         " then press Enter to see solution that equals 24."
+         " then press Enter to see solutions that equals 24."
 end
 
 loop do
