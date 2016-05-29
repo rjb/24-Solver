@@ -15,55 +15,6 @@ def solve(numbers)
   results.uniq
 end
 
-def dupes(solutions)
-  current = solutions.values.flatten
-  sols = {}
-
-  current.each do |sol|
-    inner = sol.scan(/\([0-9\+\-\*\/\s]*\)/)
-    outer = sol.scan(/\(.*\)/)
-
-    begin
-      if inner.count > 1
-        pair = inner.map { |sol| eval(sol) }.sort.join(',')
-      else
-        pair = "#{eval(inner.first)},#{eval(outer.first)}"
-      end
-    rescue
-    end
-
-    sols[pair] ||= []
-    sols[pair] << sol
-  end
-
-  sols.select { |k, v| v.count > 1 }
-end
-
-def mark_if_dupe(solutions)
-  marked_sols = {}
-  loc = ""
-  the_dupes = dupes(solutions).values
-
-  solutions.each do |num, sols|
-    sols.each do |solution|
-      is_dupe = false
-
-      the_dupes.each_with_index do |dupe_arr, i|
-        loc = i
-        if dupe_arr.include?(solution)
-          is_dupe = true
-          break
-        end
-      end
-
-      marked_sols[num] ||= []
-      marked_sols[num] << [solution, [is_dupe, loc]]
-    end
-  end
-
-  marked_sols
-end
-
 def chain_string(nums, ops)
   "((#{nums[0]} #{ops[0]} #{nums[1]}) #{ops[1]} #{nums[2]}) #{ops[2]} #{nums[3]}"
 end
